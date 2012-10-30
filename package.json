@@ -15,7 +15,7 @@
     "cookies": "~0.3.1",
     "redsess": "~0.1.0",
     "ejs": "~0.7.1",
-    "templar": "~0.1.1",
+    "templar": "~0.1.2",
     "glob": "~3.1.12",
     "filed": "0",
     "stylus": "git://github.com/LearnBoost/stylus.git",
@@ -35,7 +35,8 @@
     "npm-registry-client": "~0.2.2",
     "npmconf": "0.0",
     "hardhttps": "0",
-    "comma-it": "~0.0.4"
+    "comma-it": "~0.0.4",
+    "www-npm-search": "0.5.1"
   },
   "engines": {
     "node": ">=0.7.7"
@@ -59,5 +60,8 @@
     "npm",
     "website"
   ],
-  "license": "BSD"
+  "license": "BSD",
+  "bundleDependencies": [
+    "templar"
+  ]
 }

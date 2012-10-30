@@ -39,11 +39,13 @@ function update () {
 }
 
 function search (req, res) {
-  var u = req.url && req.url.split('?')[1]
-  if (!u) return res.error(404)
-  var target = 'https://encrypted.google.com/search?' +
-               u + '&q=site:npmjs.org&hl=en'
-  searches.push(u.replace(/^q=/, '').replace(/\+/g, ' '))
-  res.redirect(target, '302')
+  req.model.load('search', req.query)
+  req.model.end(function (er, result) {
+    result.title = "search"
+    result.pageSize = Math.ceil((result.search.hits.total || 0) / 10),
+    result.page = parseInt(req.query.page) || 1
+    result.q = req.query.q
+    res.template('search.ejs', result)
+  })
   update()
 }

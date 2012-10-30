@@ -68,6 +68,20 @@ queue(function (cb) {
   // otherwise the site is pretty empty.
   exec(process.execPath, [require.resolve('./replicate.js')], 5000, cb)
 
+},
+function (cb) {
+  //Start es and give it a few seconds to start so it can be hit.
+  exec('elasticsearch', ['-f'], 10000, cb)
+
+},
+function (cb) {
+  //Impload river and reindex registry.
+  //Might add check so we don't need to do this each time.
+  var client = require('www-npm-search')()
+  client.unlessIndexExists("npm", function() {
+    client.reindexRegistry('npm', 'module')
+  })
+  cb()
 }, function (er) {
   if (er) throw er
 
