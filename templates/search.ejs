@@ -1,0 +1,44 @@
+<%- include('header.ejs', locals) %>
+Found Packages: <%= locals.search.hits.total %>
+
+<div id="package">
+ <% if(locals.search.hits.total > 0) { %>
+  <p class="description">
+    <% if (page > 1) { %>
+      <a href="/search?q=<%=locals.q%>&page=<%= page - 1 %>">&larr; previous</a>
+    <% } %>
+    Page <%= page %>
+    <% if (page < pageSize) { %>
+      <a href="/search?q=<%=locals.q%>&page=<%= page + 1 %>">next &rarr;</a>
+    <% } %>
+  </p>
+
+  <% if (search.hits.total) {
+    search.hits.hits.forEach(function (hit) {
+    p = hit.fields
+    if (!p.name) return
+        %>
+        <div class="row">
+          <p><a href="/package/<%= p.name %>"><%= p.name %></a>
+            <%= p.description || '' %></p>
+        </div>
+        <%
+    })
+  } %>
+
+  <p class="description">
+    <% if (page > 1) { %>
+      <a href="/search?q=<%=locals.q%>&page=<%= page - 1 %>">&larr; previous</a>
+    <% } %>
+    Page <%= page %>
+    <% if (page < pageSize) { %>
+      <a href="/search?q=<%=locals.q%>&page=<%= page + 1 %>">next &rarr;</a>
+    <% } %>
+  </p>
+
+<% } %>
+
+
+</div>
+
+<%- include('footer.ejs', locals) %>
