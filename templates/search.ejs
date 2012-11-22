@@ -21,6 +21,17 @@ Found Packages: <%= locals.search.hits.total %>
         <div class="row">
           <p><a href="/package/<%= p.name %>"><%= p.name %></a>
             <%= p.description || '' %></p>
+            <p>Maintainers</p>
+           <%
+            p.maintainers.forEach(function (m) {
+              %>
+              <div class="user">
+              <a class="username" href="/~<%= m.name %>">
+              <%= m.name %></a>
+              </div>
+              <%
+            })
+            %>
         </div>
         <%
     })
